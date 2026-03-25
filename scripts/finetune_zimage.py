@@ -1,8 +1,8 @@
 import ray, torch, os
 
-ray.init(address='192.168.1.41:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
+ray.init(address='192.168.1.11:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
 
-@ray.remote(num_gpus=0.5, resources={'node:192.168.1.17': 0.01})
+@ray.remote(num_gpus=0.5, resources={'node:192.168.1.11': 0.01})
 def preprocess_images(dataset_path):
     from PIL import Image
     from torchvision import transforms
@@ -27,7 +27,7 @@ def preprocess_images(dataset_path):
     return images, captions
 
 
-@ray.remote(num_gpus=1, resources={'node:192.168.1.41': 0.01}, max_retries=0)
+@ray.remote(num_gpus=1, resources={'node:192.168.1.11': 0.01}, max_retries=0)
 def finetune_lora(images, captions, output_dir, num_epochs=50, lr=3e-4, rank=8):
     import torch, os, gc, numpy as np, time
     from diffusers import ZImagePipeline

@@ -1,8 +1,26 @@
 import ray, torch, os
 
-ray.init(address='192.168.1.41:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
+# Connect to local Ray cluster automatically
+try:
+    ray.init(address='auto', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
+except:
+    # Fallback for local testing if no cluster is running
+    ray.init(_temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
 
-@ray.remote(num_gpus=0.5, resources={'node:192.168.1.17': 0.01})
+# Dynamic Node Discovery
+def get_nodes():
+    nodes = ray.nodes()
+    alive = [n for n in nodes if n.get('Alive')]
+    head  = next((n for n in alive if 'node:__internal_head__' in n.get('Resources', {})), alive[0])
+    # Laptop is the first worker, or head if solo
+    workers = [n for n in alive if n != head]
+    laptop  = workers[0] if workers else head
+    return head.get('NodeManagerAddress'), laptop.get('NodeManagerAddress')
+
+PC_IP, LAPTOP_IP = get_nodes()
+print(f'Connected! PC:{PC_IP} (Training) | Laptop:{LAPTOP_IP} (Preprocessing)')
+
+@ray.remote(num_gpus=0.5, resources={f'node:{LAPTOP_IP}': 0.01})
 def preprocess_images(dataset_path):
     from PIL import Image
     from torchvision import transforms
@@ -26,11 +44,19 @@ def preprocess_images(dataset_path):
     return images, captions
 
 
-@ray.remote(num_gpus=1, resources={'node:192.168.1.41': 0.01}, max_retries=0)
+@ray.remote(num_gpus=1, resources={f'node:{PC_IP}': 0.01}, max_retries=0)
 def finetune_lora(images, captions, output_dir, num_epochs=40, lr=1e-4, rank=16):
     import torch, os, gc, numpy as np, time
     from diffusers import StableDiffusionPipeline, DDPMScheduler
     from torch.optim import AdamW
+
+    # Dynamically resolve project directory to handle different usernames on PC vs Laptop
+    home = os.path.expanduser('~')
+    if os.path.exists(os.path.join(home, 'OneDrive', 'Desktop', 'lora_project')):
+        output_dir = os.path.join(home, 'OneDrive', 'Desktop', 'lora_project', 'output')
+    elif os.path.exists(os.path.join(home, 'Desktop', 'lora_project')):
+        output_dir = os.path.join(home, 'Desktop', 'lora_project', 'output')
+    os.makedirs(output_dir, exist_ok=True)
 
     device = torch.device('cuda')
     print(f'GPU: {torch.cuda.get_device_name(0)}')

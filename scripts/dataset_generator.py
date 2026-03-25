@@ -53,6 +53,48 @@ KEYWORDS = [
     'Shree Hanuman Mandir Chandkheda Ahmedabad',
     'Shree Khodiyar Mata Mandir Behrampura Ahmedabad',
     'Shree Chamunda Mata Mandir Danilimda Ahmedabad',
+    'Shree Jogani Mata Mandir Isanpur south Ahmedabad',
+    'Shree Somnath Mahadev Vatva south Ahmedabad',
+    'Shree Shiv Shakti Mandir Bopal west Ahmedabad',
+    'Shree Khodiyar Mata Mandir Ghuma west Ahmedabad',
+    'Shree Swami Narayan Mandir South Bopal west Ahmedabad',
+    'Shree Hanuman Mandir Shela west Ahmedabad',
+    'Shree Khodiyar Mata Mandir Gota west Ahmedabad',
+    'Shree Hanuman Mandir Gota west Ahmedabad',
+    'Shree Nilkanth Mahadev Mandir Gota west Ahmedabad',
+    'Shree Gayatri Mandir Gota west Ahmedabad',
+    'Shree Swaminarayan Mandir Gota west Ahmedabad',
+    'Shri Maa Vaishnodevi Temple Vaishnodevi Circle north-west Ahmedabad',
+    'Shree Hanuman Mandir Vaishnodevi Circle north-west Ahmedabad',
+    'Shree Shankar Mahadev Mandir SG Highway near Vaishnodevi north-west Ahmedabad',
+    'Shree Ashapura Mata Mandir Vaishnodevi Circle north-west Ahmedabad',
+    'Shree Jogani Mata Mandir Vaishnodevi Circle north-west Ahmedabad',
+    'Shree Khodiyar Mata Mandir Godasar south-east Ahmedabad',
+    'Shree Hanuman Mandir Godasar south-east Ahmedabad',
+    'Shree Nilkanth Mahadev Mandir Godasar south-east Ahmedabad',
+    'Shree Jogani Mata Mandir Godasar south-east Ahmedabad',
+    'Shree Shiv Mandir Ambli west Ahmedabad',
+    'Shree Hanuman Mandir Ambli west Ahmedabad',
+    'Shree Ashapura Mata Mandir Ambli west Ahmedabad',
+    'Shree Shankar Mahadev Mandir Sindhu Bhavan Road west Ahmedabad',
+    'Shree Hanuman Mandir Sindhu Bhavan Road west Ahmedabad',
+    'Shree Radhavallabh Mandir Thaltej west Ahmedabad',
+    'Shree Hanuman Mandir Thaltej west Ahmedabad',
+    'Shree Nilkanth Mahadev Mandir Thaltej west Ahmedabad',
+    'Shree Khodiyar Mata Mandir Thaltej west Ahmedabad',
+    'Shree Hanuman Mandir Bopal west Ahmedabad',
+    'Shree Swaminarayan Mandir Bopal west Ahmedabad',
+    'Shree Gayatri Mandir Bopal west Ahmedabad',
+    'Shree Hanuman Mandir South Bopal west Ahmedabad',
+    'Shree Nilkanth Mahadev Mandir Ghuma west Ahmedabad',
+    'Shree Vejalpur Hanuman Mandir Vejalpur west Ahmedabad',
+    'Shree Nilkanth Mahadev Mandir Vejalpur west Ahmedabad',
+    'Shree Khodiyar Mata Mandir Vejalpur west Ahmedabad',
+    'Shree Gayatri Mandir Vejalpur west Ahmedabad',
+    'Shree Ashapura Mata Mandir Makarba south-west Ahmedabad',
+    'Shree Hanuman Mandir Makarba south-west Ahmedabad',
+    'Shree Shankar Mahadev Mandir Makarba south-west Ahmedabad',
+    'Shree Ramdev Pir Mandir Makarba south-west Ahmedabad',
 ]
 
 # Caption prefix — concept token for this LoRA
@@ -62,7 +104,7 @@ CAPTION_PREFIX = 'a photo of sks temple,'
 IMAGES_PER_KEYWORD = 1
 
 # Hard cap: only keep this many images after filtering (first run = 30)
-MAX_TOTAL_IMAGES = 30
+MAX_TOTAL_IMAGES = 60
 
 # ══════════════════════════════════════════════════════════════
 # 2. PATHS

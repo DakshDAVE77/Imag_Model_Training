@@ -1,9 +1,9 @@
 import ray
 import torch
 
-ray.init(address='192.168.1.41:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
+ray.init(address='192.168.1.11:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
 
-@ray.remote(num_gpus=1, resources={'node:192.168.1.41': 0.01})
+@ray.remote(num_gpus=1, resources={'node:192.168.1.11': 0.01})
 def test_generation():
     import torch
     from diffusers import ZImagePipeline

@@ -1,9 +1,9 @@
 import ray
 import os
 
-ray.init(address='192.168.1.41:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray', ignore_reinit_error=True)
+ray.init(address='192.168.1.11:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray', ignore_reinit_error=True)
 
-@ray.remote(resources={'node:192.168.1.41': 0.01})
+@ray.remote(resources={'node:192.168.1.11': 0.01})
 def read_lora_from_pc():
     # Try the user path first
     paths = [
