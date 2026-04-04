@@ -1,11 +1,11 @@
 import ray, torch, io, os
 
-ray.init(address='192.168.1.11:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
+ray.init(address='192.168.1.31:6379', _temp_dir=r'C:\Users\sarja\AppData\Local\Temp\ray')
 
 # ── STAGE 1: Generate on Laptop 3080 Ti ──────────────────
 # Using Stable Diffusion 1.5 — a proper image model for sharp output.
 # Z-Image-Turbo was a video model that produced blurry/artifact images.
-@ray.remote(num_gpus=1, resources={'node:192.168.1.11': 0.01})
+@ray.remote(num_gpus=1, resources={'node:192.168.1.31': 0.01})
 def generate(prompt, negative_prompt, seed):
     import torch, io
     from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
@@ -76,7 +76,7 @@ def generate(prompt, negative_prompt, seed):
 
 
 # ── STAGE 2: ESRGAN upscale on RTX 4090 (no basicsr needed) ──
-@ray.remote(num_gpus=1, resources={'node:192.168.1.11': 0.01})
+@ray.remote(num_gpus=1, resources={'node:192.168.1.31': 0.01})
 def upscale(img_bytes):
     import torch, io, os, urllib.request
     import torch.nn as nn
